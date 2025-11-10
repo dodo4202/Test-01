@@ -52,44 +52,54 @@
     </style>
 </head>
 
-<!-- === FIREBASE REALTIME SYNC === -->
+<!-- === FIREBASE REALTIME SYNC (CORRIGÉ) === -->
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database-compat.js"></script>
 
 <script>
-  // === COLLE TA CONFIG FIREBASE ICI ===
-	 const firebaseConfig = {
-	  apiKey: "AIzaSyCtGFj32o4WcPmtK9lbzgciKGhoW8cShas",
-	  authDomain: "boutique-oav-stock.firebaseapp.com",
-	  databaseURL: "https://boutique-oav-stock-default-rtdb.europe-west1.firebasedatabase.app",
-	  projectId: "boutique-oav-stock",
-	  storageBucket: "boutique-oav-stock.firebasestorage.app",
-	  messagingSenderId: "838275589841",
-	  appId: "1:838275589841:web:bf01a1adca0449490687f0"
-	};
+  // TA CONFIG (OK)
+  const firebaseConfig = {
+    apiKey: "AIzaSyCtGFj32o4WcPmtK9lbzgciKGhoW8cShas",
+    authDomain: "boutique-oav-stock.firebaseapp.com",
+    databaseURL: "https://boutique-oav-stock-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "boutique-oav-stock",
+    storageBucket: "boutique-oav-stock.firebasestorage.app",
+    messagingSenderId: "838275589841",
+    appId: "1:838275589841:web:bf01a1adca0449490687f0"
+  };
 
-  // Initialisation
+  // Init Firebase
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
 
-  // === SYNCHRO DE TOUTES LES CHECKBOXES ===
-  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-    const key = checkbox.id;
+  // Attendre que le DOM soit chargé
+  document.addEventListener('DOMContentLoaded', () => {
+    console.log("DOM chargé, Firebase prêt");
 
-    // Écoute les changements depuis Firebase
-    db.ref('stock/' + key).on('value', (snapshot) => {
-      const value = snapshot.val();
-      if (value !== null) {
-        checkbox.checked = value;
-      } else {
-        // Si pas dans Firebase → initialise à checked
+    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+      const key = checkbox.id;
+      if (!key) return; // Ignore les sans ID
+
+      // Écoute Firebase
+      db.ref('stock/' + key).on('value', (snapshot) => {
+        const value = snapshot.val();
+        if (value !== null) {
+          checkbox.checked = value;
+        }
+      });
+
+      // Envoie les changements
+      checkbox.addEventListener('change', () => {
         db.ref('stock/' + key).set(checkbox.checked);
-      }
-    });
+        console.log("Sync:", key, checkbox.checked);
+      });
 
-    // Envoie les changements locaux
-    checkbox.addEventListener('change', () => {
-      db.ref('stock/' + key).set(checkbox.checked);
+      // Init si pas dans Firebase
+      db.ref('stock/' + key).once('value').then(snap => {
+        if (snap.val() === null) {
+          db.ref('stock/' + key).set(checkbox.checked);
+        }
+      });
     });
   });
 </script>
@@ -1788,4 +1798,5 @@
     </script>
 </body>
 </html>
+
 
