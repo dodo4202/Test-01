@@ -52,12 +52,13 @@
     </style>
 </head>
 
-<!-- === FIREBASE REALTIME SYNC (CORRIGÉ) === -->
+<!-- === FIREBASE + AUTH + POPUP (VERSION FINALE) === -->
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
 
 <script>
-  // TA CONFIG (OK)
+  // CONFIG FIREBASE
   const firebaseConfig = {
     apiKey: "AIzaSyCtGFj32o4WcPmtK9lbzgciKGhoW8cShas",
     authDomain: "boutique-oav-stock.firebaseapp.com",
@@ -68,33 +69,37 @@
     appId: "1:838275589841:web:bf01a1adca0449490687f0"
   };
 
-  // Init Firebase
+  // INIT
   firebase.initializeApp(firebaseConfig);
   const db = firebase.database();
+  const auth = firebase.auth();
 
-  // Attendre que le DOM soit chargé
+  // Attendre le DOM
   document.addEventListener('DOMContentLoaded', () => {
-    console.log("DOM chargé, Firebase prêt");
+    console.log("DOM chargé, Firebase & Auth prêts");
 
+    // === SYNCHRO CHECKBOXES ===
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
       const key = checkbox.id;
-      if (!key) return; // Ignore les sans ID
+      if (!key) return;
 
-      // Écoute Firebase
-      db.ref('stock/' + key).on('value', (snapshot) => {
-        const value = snapshot.val();
-        if (value !== null) {
-          checkbox.checked = value;
+      // Lecture (publique)
+      db.ref('stock/' + key).on('value', snap => {
+        const val = snap.val();
+        if (val !== null) checkbox.checked = val;
+      });
+
+      // Écriture (seulement connecté)
+      checkbox.addEventListener('click', e => {
+        if (!auth.currentUser) {
+          e.preventDefault();
+          showLoginPopup(checkbox);
+        } else {
+          db.ref('stock/' + key).set(checkbox.checked);
         }
       });
 
-      // Envoie les changements
-      checkbox.addEventListener('change', () => {
-        db.ref('stock/' + key).set(checkbox.checked);
-        console.log("Sync:", key, checkbox.checked);
-      });
-
-      // Init si pas dans Firebase
+      // Init si vide
       db.ref('stock/' + key).once('value').then(snap => {
         if (snap.val() === null) {
           db.ref('stock/' + key).set(checkbox.checked);
@@ -102,54 +107,19 @@
       });
     });
   });
-</script>
 
-	<!-- === LOGIN CONSEILLER === -->
-<script>
-  const auth = firebase.auth();
-  const db = firebase.database();
-
-  // Afficher popup login SEULEMENT si on clique sur une checkbox
-  document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-    const key = checkbox.id;
-
-    // Lecture : tout le monde
-    db.ref('stock/' + key).on('value', snap => {
-      const val = snap.val();
-      if (val !== null) checkbox.checked = val;
-    });
-
-    // Écriture : seulement si connecté
-    checkbox.addEventListener('click', (e) => {
-      if (!auth.currentUser) {
-        e.preventDefault(); // Bloque le clic
-        showLoginPopup(checkbox); // Montre le login
-      } else {
-        // Connecté → envoie le changement
-        db.ref('stock/' + key).set(checkbox.checked);
-      }
-    });
-
-    // Init
-    db.ref('stock/' + key).once('value').then(snap => {
-      if (snap.val() === null) {
-        db.ref('stock/' + key).set(checkbox.checked);
-      }
-    });
-  });
-
-  // === POPUP LOGIN (apparaît seulement au clic) ===
+  // === POPUP LOGIN AVEC CROIX ===
   function showLoginPopup(checkbox) {
     if (document.getElementById('loginPopup')) return;
 
     const popup = document.createElement('div');
     popup.id = 'loginPopup';
-    popup.style = `
-      position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;
-      display:flex;align-items:center;justify-content:center;z-index:9999;
-    `;
+    popup.style = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;display:flex;align-items:center;justify-content:center;z-index:9999;';
+    
     popup.innerHTML = `
-      <div style="background:white;padding:30px;border-radius:15px;text-align:center;width:300px;">
+      <div style="background:white;padding:30px;border-radius:15px;text-align:center;width:300px;position:relative;">
+        <button onclick="document.getElementById('loginPopup').remove()" 
+                style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:24px;cursor:pointer;color:#999;">×</button>
         <h3>Connexion requise</h3>
         <p>Pour modifier le stock</p>
         <input type="email" id="loginEmail" placeholder="Email" style="width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px;"><br>
@@ -160,16 +130,21 @@
       </div>
     `;
     document.body.appendChild(popup);
+
+    // Fermer en cliquant dehors
+    popup.addEventListener('click', e => {
+      if (e.target === popup) popup.remove();
+    });
   }
 
-  // === FONCTION LOGIN ===
+  // === LOGIN ===
   window.tryLogin = function(checkboxId) {
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
+
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
         document.getElementById('loginPopup').remove();
-        // Réappliquer le clic
         const cb = document.getElementById(checkboxId);
         cb.checked = !cb.checked;
         db.ref('stock/' + checkboxId).set(cb.checked);
@@ -179,7 +154,7 @@
       });
   };
 
-  // Optionnel : bouton déconnexion
+  // === BOUTON DÉCONNEXION ===
   auth.onAuthStateChanged(user => {
     const header = document.querySelector('header');
     let btn = document.getElementById('logoutBtn');
@@ -1890,6 +1865,7 @@
     </script>
 </body>
 </html>
+
 
 
 
