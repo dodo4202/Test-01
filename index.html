@@ -103,6 +103,41 @@
     });
   });
 </script>
+
+	<!-- === LOGIN CONSEILLER === -->
+<div id="loginScreen" style="position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;display:flex;align-items:center;justify-content:center;z-index:9999;">
+  <div style="background:white;padding:30px;border-radius:15px;text-align:center;width:300px;">
+    <h3>Connexion Conseiller</h3>
+    <input type="email" id="loginEmail" placeholder="Email" style="width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px;"><br>
+    <input type="password" id="loginPassword" placeholder="Mot de passe" style="width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px;"><br>
+    <button onclick="login()" style="background:#007aff;color:white;padding:12px 20px;border:none;border-radius:5px;cursor:pointer;">Se connecter</button>
+    <p id="loginError" style="color:red;margin-top:10px;"></p>
+  </div>
+</div>
+
+<script>
+  // Ajouter Firebase Auth
+  const auth = firebase.auth();
+
+  function login() {
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        document.getElementById('loginScreen').remove();
+      })
+      .catch(err => {
+        document.getElementById('loginError').textContent = "Erreur : " + err.message;
+      });
+  }
+
+  // Déconnexion auto si pas auth
+  auth.onAuthStateChanged(user => {
+    if (!user && !document.getElementById('loginScreen')) {
+      location.reload();
+    }
+  });
+</script>
 	
 <body>
 
@@ -1798,6 +1833,7 @@
     </script>
 </body>
 </html>
+
 
 
 
