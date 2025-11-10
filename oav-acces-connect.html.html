@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Boutique Wearables - Apple, Samsung & Lunettes</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background-color: #f5f5f5; }
+        header { text-align: center; background-color: #000; color: white; padding: 20px; }
+        nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+        nav button { padding: 10px 18px; background-color: #007aff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; }
+        nav button.active { background-color: #0056cc; }
+        section { display: none; margin: 20px 0; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        section.active { display: block; }
+        .sub-nav { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+        .sub-nav button { padding: 8px 14px; font-size: 13px; background-color: #e0e0e0; color: #333; border: none; border-radius: 5px; cursor: pointer; }
+        .sub-nav button.active { background-color: #007aff; color: white; }
+        .sub-section { display: none; }
+        .sub-section.active { display: block; }
+        .colors { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin: 20px 0; }
+        .color-item { text-align: center; }
+        .color-swatch { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #ccc; box-shadow: 0 2px 5px rgba(0,0,0,0.2); margin-bottom: 8px; }
+        .color-label { font-size: 12px; margin-bottom: 5px; }
+        .checkbox-container { display: flex; justify-content: center; }
+        .checkbox-container input { transform: scale(1.3); cursor: pointer; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 14px; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: center; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .price-table { margin-bottom: 25px; }
+        .specs-table { margin-top: 25px; }
+        .specs-table th { background-color: #e6f7ff; }
+        .comparison h3 { color: #007aff; margin-top: 30px; }
+        ul { list-style-type: disc; padding-left: 25px; margin: 10px 0; }
+        .big-comparison-table { font-size: 13px; margin-top: 30px; }
+        .big-comparison-table th { background-color: #333; color: white; }
+        .big-comparison-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .checkmark { color: #28a745; font-weight: bold; }
+        .cross { color: #dc3545; font-weight: bold; }
+        .note { font-size: 11px; color: #666; font-style: italic; }
+        .sensor-uses { margin-top: 20px; background-color: #f8f9fa; padding: 15px; border-radius: 5px; }
+        .sensor-uses h4 { color: #007aff; margin-bottom: 10px; }
+        .sensor-uses ul { padding-left: 20px; margin: 0; }
+        .material-info { font-size: 13px; color: #555; font-style: italic; margin-top: 10px; text-align: center; }
+        @media (max-width: 768px) {
+            nav, .sub-nav { flex-direction: column; align-items: center; }
+            table { font-size: 12px; }
+            .color-swatch { width: 45px; height: 45px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>OAV ACCESSOIRES CONNECTES</h1>
+        <h4>Fait par Dorian TECHER</h4>
+        <p>Apple Watch • Galaxy Watch • Lunettes Intelligentes</p>
+    </header>
+
+    <!-- === NAVIGATION PRINCIPALE === -->
+    <nav>
+      <button onclick="openTab(event, 'apple')" class="active">Apple</button>
+        <button onclick="openTab(event, 'samsung')">Samsung</button>
+        <button onclick="openTab(event, 'honor')">Honor</button>
+        <button onclick="openTab(event, 'xiaomi')">Xiaomi</button>
+        <button onclick="openTab(event, 'lunettes')">Lunettes</button>
+    </nav>
+
+    <!-- ==================== APPLE ==================== -->
+    <section id="apple" class="tab-content active">
+        <nav class="sub-nav">
+            <button onclick="openSubTab(event, 'apple-series11')" class="active">Series 11</button>
+            <button onclick="openSubTab(event, 'apple-series10')">Series 10</button>
+            <button onclick="openSubTab(event, 'apple-se3')">SE 3</button>
+            <button onclick="openSubTab(event, 'apple-se2')">SE 2</button>
+            <button onclick="openSubTab(event, 'apple-ultra3')">Ultra 3</button>
+            <button onclick="openSubTab(event, 'apple-ultra2')">Ultra 2</button>
+            <button onclick="openSubTab(event, 'apple-comparison')">Comparaison</button>
+        </nav>
+
+      <!-- Series 11 -->
+        <div id="apple-series11" class="sub-section active">
+            <h2>Apple Watch Series 11</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium 100% recyclé (4 couleurs) ou Titane poli 100% recyclé (3 couleurs)</p>
+            <div class="colors">
+                <div class="color-item">
+		                    <div class="color-swatch" style="background-color: #000;"></div>
+							<div class="color-label">Jet Black</div>
+		                    <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #b76e79;"></div>
+                    <div class="color-label">Rose Gold</div>
+                             <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Silver</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-label">Space Gray</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+            </div>
+            <div class="titanium-colors">
+                <h4>Couleurs Titane</h4>
+                <div class="colors">
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #8C8C8C;"></div>
+                        <div class="color-label">Natural</div>
+                                  <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #ffd700;"></div>
+                        <div class="color-label">Gold</div>
+                                  <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #2B2B2B;"></div>
+                        <div class="color-label">Slate</div>
+                                  <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                    </div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.apple.com/apple-watch-series-11/" target="_blank">Voir sur Apple.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>GPS (€) Aluminium</th><th>GPS + Cellulaire (€) Aluminium</th><th>GPS + Cellulaire (€) Titane</th></tr></thead>
+                <tbody>
+                    <tr><td>42mm</td><td>429</td><td>529</td><td>699</td></tr>
+                    <tr><td>46mm</td><td>459</td><td>559</td><td>729</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran Retina</td><td>Always-On LTPO OLED, 2000 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS précis + Galileo</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>50m (ISO 22810)</td></tr>
+                    <tr><td>Processeur</td><td>S10 </td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique 3e gén + électrique</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui (approuvé CE)</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui (capteur de température)</td></tr>
+                    <tr><td>Batterie</td><td>24 heures (36h mode économie)</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Series 10 -->
+        <div id="apple-series10" class="sub-section">
+            <h2>Apple Watch Series 10</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium (42/46mm) ou Titane (modèles premium)</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Jet Black</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #b76e79;"></div>
+                    <div class="color-label">Rose Gold</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Silver</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+            </div>
+			 <div class="titanium-colors">
+                <h4>Couleurs Titane</h4>
+                <div class="colors">
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #8C8C8C;"></div>
+                        <div class="color-label">Natural</div>
+                                 <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #ffd700;"></div>
+                        <div class="color-label">Gold</div>
+                                 <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-swatch" style="background-color: #2B2B2B;"></div>
+                        <div class="color-label">Slate</div>
+                                 <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">42mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">46mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                    </div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.apple.com/apple-watch-series-10/" target="_blank">Voir sur Apple.com</a></em></p>
+
+           <table class="price-table">
+                <thead><tr><th>Taille</th><th>GPS (€) Aluminium</th><th>GPS + Cellulaire (€) Aluminium</th><th>GPS + Cellulaire (€) Titane</th></tr></thead>
+                <tbody>
+                    <tr><td>42mm</td><td>429</td><td>529</td><td>699</td></tr>
+                    <tr><td>46mm</td><td>459</td><td>559</td><td>729</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran Retina</td><td>Always-On LTPO OLED, 2000 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS précis</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>50m</td></tr>
+                    <tr><td>Processeur</td><td>S10 SiP</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique 3e gén</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Non</td></tr>
+                    <tr><td>Batterie</td><td>18 heures</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SE 3 -->
+        <div id="apple-se3" class="sub-section">
+            <h2>Apple Watch SE 3</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium 100% recyclé</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Midnight</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #f5e6d3;"></div>
+                    <div class="color-label">Starlight</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.apple.com/apple-watch-se/" target="_blank">Voir sur Apple.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>GPS (€)</th><th>GPS + Cellulaire (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>40mm</td><td>269</td><td>319</td></tr>
+                    <tr><td>44mm</td><td>299</td><td>349</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran Retina</td><td>Retina OLED, 1000 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS précis</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>50m</td></tr>
+                    <tr><td>Processeur</td><td>S10 SiP</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique 3e gén</td></tr>
+                    <tr><td>Always-On Display</td><td>Non</td></tr>
+                    <tr><td>ECG</td><td>Non</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Non</td></tr>
+                    <tr><td>Température</td><td>Oui (capteur de température poignet)</td></tr>
+                    <tr><td>Batterie</td><td>18 heures</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- SE 2 -->
+        <div id="apple-se2" class="sub-section">
+            <h2>Apple Watch SE 2</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium 100% recyclé</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Midnight</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #f5e6d3;"></div>
+                    <div class="color-label">Starlight</div>
+                              <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Silver</div>
+                            <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.apple.com/apple-watch-se/" target="_blank">Voir sur Apple.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>GPS (€)</th><th>GPS + Cellulaire (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>40mm</td><td>219</td><td>269</td></tr>
+                    <tr><td>44mm</td><td>249</td><td>299</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran Retina</td><td>Retina OLED, 1000 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>50m</td></tr>
+                    <tr><td>Processeur</td><td>S8 SiP</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique 2e gén</td></tr>
+                    <tr><td>Always-On Display</td><td>Non</td></tr>
+                    <tr><td>ECG</td><td>Non</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Non</td></tr>
+                    <tr><td>Température</td><td>Non</td></tr>
+                    <tr><td>Batterie</td><td>18 heures</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Ultra 3 -->
+        <div id="apple-ultra3" class="sub-section">
+            <h2>Apple Watch Ultra 3</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Titane aéronautique (100% recyclé)</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #8C8C8C;"></div>
+                    <div class="color-label">Natural Titanium</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Black Titanium</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.apple.com/apple-watch-ultra/" target="_blank">Voir sur Apple.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>GPS + Cellulaire (€)</th></tr></thead>
+                <tbody><tr><td>49mm</td><td>849</td></tr></tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran Retina</td><td>Always-On LTPO OLED, 3000 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS double fréquence + satellite</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>100m + plongée 40m</td></tr>
+                    <tr><td>Processeur</td><td>U3 SiP</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique 4e gén + électrique</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui</td></tr>
+                    <tr><td>Batterie</td><td>36 heures (80h mode économie)</td></tr>
+                    <tr><td>Bouton Action</td><td>Oui</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Ultra 2 -->
+        <div id="apple-ultra2" class="sub-section">
+            <h2>Apple Watch Ultra 2</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Titane aéronautique (95% recyclé)</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #8C8C8C;"></div>
+                    <div class="color-label">Natural Titanium</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Black Titanium</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.apple.com/apple-watch-ultra-2/" target="_blank">Voir sur Apple.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>GPS + Cellulaire (€)</th></tr></thead>
+                <tbody><tr><td>49mm</td><td>749</td></tr></tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran Retina</td><td>Always-On LTPO OLED, 3000 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS double fréquence (L1+L5)</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>100m + EN13319 (plongée)</td></tr>
+                    <tr><td>Processeur</td><td>S9 SiP</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique 3e gén + électrique</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui</td></tr>
+                    <tr><td>Batterie</td><td>36 heures (72h mode économie)</td></tr>
+                    <tr><td>Bouton Action</td><td>Oui</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Comparaison Apple -->
+        <div id="apple-comparison" class="sub-section comparison">
+            <h2>Comparaison Complète des Apple Watch</h2>
+
+            <h3>Utilisations des Capteurs Principaux</h3>
+            <div class="sensor-uses">
+                <h4>Capteur cardiaque (Optique) :</h4>
+                <ul>
+                    <li>Suivi continu du rythme cardiaque pendant les entraînements et la vie quotidienne.</li>
+                    <li>Détection de rythmes irréguliers (ex. : fibrillation auriculaire).</li>
+                    <li>Calcul des calories brûlées et zones cardiaques.</li>
+                </ul>
+
+                <h4>ECG (Électrique) :</h4>
+                <ul>
+                    <li>Enregistrement d'un électrocardiogramme pour détecter les anomalies cardiaques.</li>
+                    <li>Alertes pour consulter un médecin en cas de rythme anormal.</li>
+                    <li>Partage des données avec les professionnels de santé.</li>
+                </ul>
+
+                <h4>Oxymètre de sang (SpO2) :</h4>
+                <ul>
+                    <li>Mesure de la saturation en oxygène dans le sang.</li>
+                    <li>Détection d'apnée du sommeil ou de problèmes respiratoires.</li>
+                    <li>Utile pour les activités en altitude ou pour surveiller la santé respiratoire.</li>
+                </ul>
+
+                <h4>Température (Poignet) :</h4>
+                <ul>
+                    <li>Suivi des variations nocturnes pour insights sur le bien-être général.</li>
+                    <li>Estimations rétrospectives d'ovulation et amélioration des prédictions de cycle menstruel.</li>
+                    <li>Détection précoce de fièvre ou changements liés à la maladie.</li>
+                </ul>
+
+                <h4>Détection de chute :</h4>
+                <ul>
+                    <li>Détecte les chutes graves et appelle les secours automatiquement si inactif.</li>
+                    <li>Idéal pour les seniors ou activités à risque (randonnée, sport).</li>
+                    <li>Partage de la localisation en urgence.</li>
+                </ul>
+            </div>
+
+            <h3>Ce que la SE 3 a de moins que la Series 11 :</h3>
+            <ul>
+                <li>Pas d’écran Always-On, ECG, oxymètre de sang.</li>
+                <li>Autonomie identique (18h), mais charge plus lente.</li>
+                <li>Écran moins lumineux (1000 nits vs 2000 nits).</li>
+                <li>Pas de verre Ion-X renforcé ni de matériaux premium.</li>
+            </ul>
+
+            <h3>Ce que la SE 3 a de plus que la SE 2 :</h3>
+            <ul>
+                <li>Processeur S10 (vs S8) → plus rapide, plus efficace.</li>
+                <li>Capteur de température pour suivi du cycle et bien-être.</li>
+                <li>Support 5G sur modèles Cellular.</li>
+                <li>Capteur cardiaque 3e gén (vs 2e gén).</li>
+            </ul>
+
+            <h3>Ce que la Series 11 a de plus que la SE 3 :</h3>
+            <ul>
+                <li>Toutes les fonctions santé avancées : ECG, SpO2, hypertension, score de sommeil.</li>
+                <li>Écran Always-On, plus lumineux, plus grand.</li>
+                <li>Charge ultra-rapide, autonomie 24h.</li>
+                <li>Support 5G, matériaux premium.</li>
+            </ul>
+
+            <h3>Ce que la Series 11 a de plus que la Series 10 :</h3>
+            <ul>
+                <li>Support 5G natif.</li>
+                <li>Capteur de température + notifications hypertension.</li>
+                <li>Autonomie 24h (vs 18h).</li>
+                <li>Verre Ion-X 2x plus résistant.</li>
+                <li>Apple Intelligence intégrée (Workout Buddy, etc.).</li>
+            </ul>
+
+            <h3>Ce que l’Ultra 3 a de plus que l’Ultra 2 :</h3>
+            <ul>
+                <li>GPS satellite intégré (communication d’urgence hors réseau).</li>
+                <li>Capteur cardiaque 4e génération (précision accrue).</li>
+                <li>Détection de noyade (nouveau capteur de profondeur + algorithme).</li>
+                <li>Autonomie en mode économie : 80h (vs 72h).</li>
+                <li>Processeur U3 SiP plus puissant (meilleure gestion IA).</li>
+                <li>Support 5G avancé + eSIM amélioré.</li>
+                <li>Plongée certifiée jusqu’à 40m (vs 30m sur Ultra 2).</li>
+            </ul>
+
+            <h3>Ce que l’Ultra 2 a de moins que l’Ultra 3 :</h3>
+            <ul>
+                <li>Pas de communication satellite.</li>
+                <li>Capteur cardiaque 3e gén (moins précis).</li>
+                <li>Pas de détection de noyade.</li>
+                <li>Autonomie limitée à 72h en mode économie.</li>
+                <li>Plongée limitée à 30m (EN13319).</li>
+            </ul>
+
+            <h3>Tableau Comparatif Complet</h3>
+            <table class="big-comparison-table">
+                <thead>
+                    <tr>
+                        <th>Modèle</th>
+                        <th>Matériau</th>
+                        <th>Écran Retina</th>
+                        <th>GPS</th>
+                        <th>Résist. Eau</th>
+                        <th>Processeur</th>
+                        <th>Cœur</th>
+                        <th>Always-On</th>
+                        <th>ECG</th>
+                        <th>SpO2</th>
+                        <th>Temp.</th>
+                        <th>Batterie</th>
+                        <th>Bouton Action</th>
+                        <th>Détection Chute</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Series 11</strong></td>
+                        <td>Aluminium</td>
+                        <td>2000 nits</td>
+                        <td>Précis</td>
+                        <td>50m</td>
+                        <td>S10</td>
+                        <td>3e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>24h</td>
+                        <td><span class="cross">Non</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Series 10</strong></td>
+                        <td>Alu/Titane</td>
+                        <td>2000 nits</td>
+                        <td>Précis</td>
+                        <td>50m</td>
+                        <td>S10</td>
+                        <td>3e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="cross">Non</span></td>
+                        <td>18h</td>
+                        <td><span class="cross">Non</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SE 3</strong></td>
+                        <td>Aluminium</td>
+                        <td>1000 nits</td>
+                        <td>Précis</td>
+                        <td>50m</td>
+                        <td>S10</td>
+                        <td>3e gén</td>
+                        <td><span class="cross">Non</span></td>
+                        <td><span class="cross">Non</span></td>
+                        <td><span class="cross">Non</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>18h</td>
+                        <td><span class="cross">Non</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SE 2</strong></td>
+                        <td>Aluminium</td>
+                        <td>1000 nits</td>
+                        <td>Standard</td>
+                        <td>50m</td>
+                        <td>S8</td>
+                        <td>2e gén</td>
+                        <td><span class="cross">Non</span></td>
+                        <td><span class="cross">Non</span></td>
+                        <td><span class="cross">Non</span></td>
+                        <td><span class="cross">Non</span></td>
+                        <td>18h</td>
+                        <td><span class="cross">Non</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ultra 3</strong></td>
+                        <td>Titane</td>
+                        <td>3000 nits</td>
+                        <td>Double + Sat</td>
+                        <td>100m + plongée</td>
+                        <td>U3</td>
+                        <td>4e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>36h</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ultra 2</strong></td>
+                        <td>Titane</td>
+                        <td>3000 nits</td>
+                        <td>Double</td>
+                        <td>100m + plongée</td>
+                        <td>S9</td>
+                        <td>3e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>36h</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>Oui</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="note">* Données basées sur les spécifications officielles Apple 2025. Prix indicatifs en € (vérifiez en boutique). Fait par Dorian, outil digital pour conseillers en vente.</p>
+        </div>
+    </section>
+
+    <!-- ==================== SAMSUNG ==================== -->
+    <section id="samsung" class="tab-content">
+        <nav class="sub-nav">
+            <button onclick="openSubTab(event, 'samsung-watch8')" class="active">Watch 8</button>
+            <button onclick="openSubTab(event, 'samsung-watch8classic')">Watch 8 Classic</button>
+            <button onclick="openSubTab(event, 'samsung-watchultra2025')">Watch Ultra 2025</button>
+            <button onclick="openSubTab(event, 'samsung-watch7')">Watch 7</button>
+            <button onclick="openSubTab(event, 'samsung-comparison')">Comparaison</button>
+        </nav>
+
+        <!-- Watch 8 -->
+        <div id="samsung-watch8" class="sub-section active">
+            <h2>Samsung Galaxy Watch 8</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium Armor</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-label">Graphite</div>
+                    <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Silver</div>
+                     <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch8/" target="_blank">Voir sur Samsung.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>40mm</td><td>349</td><td>399</td></tr>
+                    <tr><td>44mm</td><td>379</td><td>429</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran </td><td>Super AMOLED, 3000 nits</td></tr>
+                    <tr><td>GPS</td><td>Double bande</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>IP68 + 5ATM</td></tr>
+                    <tr><td>Processeur</td><td>Exynos W1000 3nm</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>BioActive Sensor 3e gén</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui</td></tr>
+                    <tr><td>Batterie</td><td>325/435 mAh (~40h)</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Watch 8 Classic -->
+        <div id="samsung-watch8classic" class="sub-section">
+            <h2>Samsung Galaxy Watch 8 Classic</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Acier inoxydable</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Black</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #fff;"></div>
+                    <div class="color-label">White</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch8-classic/" target="_blank">Voir sur Samsung.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>46mm</td><td>499</td><td>549</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran </td><td>Super AMOLED rotatif, 3000 nits</td></tr>
+                    <tr><td>GPS</td><td>Double bande</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>IP68 + 5ATM</td></tr>
+                    <tr><td>Processeur</td><td>Exynos W1000</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>BioActive Sensor</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui</td></tr>
+                    <tr><td>Batterie</td><td>425 mAh (~40h)</td></tr>
+                    <tr><td>Bouton Action</td><td>Oui (rotatif)</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Watch Ultra 2025 -->
+        <div id="samsung-watchultra2025" class="sub-section">
+            <h2>Samsung Galaxy Watch Ultra 2025</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Titane</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000080;"></div>
+                    <div class="color-label">Titanium Blue</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-label">Titanium Gray</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #fff;"></div>
+                    <div class="color-label">Titanium White</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Titanium Silver</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch-ultra/" target="_blank">Voir sur Samsung.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>LTE (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>47mm</td><td>749</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran </td><td>Super AMOLED, 3000 nits</td></tr>
+                    <tr><td>GPS</td><td>Double bande + L1/L5</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>10ATM + plongée</td></tr>
+                    <tr><td>Processeur</td><td>Exynos W1000</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>BioActive avancé</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui</td></tr>
+                    <tr><td>Batterie</td><td>590 mAh (~100h)</td></tr>
+                    <tr><td>Bouton Action</td><td>Oui (Quick Button)</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Watch 7 -->
+        <div id="samsung-watch7" class="sub-section">
+            <h2>Samsung Galaxy Watch 7</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #008000;"></div>
+                    <div class="color-label">Green</div>
+                    <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Silver</div>
+                    <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #fff8dc;"></div>
+                    <div class="color-label">Cream</div>
+                     <div class="size-stock">
+		        <div class="size-item">
+		            <span class="size-label">40mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-42mm" checked></div>
+		        </div>
+		        <div class="size-item">
+		            <span class="size-label">44mm</span>
+		            <div class="checkbox-container"><input type="checkbox" id="series11-46mm" checked></div>
+		        </div>
+  		  </div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch7/" target="_blank">Voir sur Samsung.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>40mm</td><td>300</td><td>350</td></tr>
+                    <tr><td>44mm</td><td>330</td><td>380</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran </td><td>Super AMOLED, 2000 nits</td></tr>
+                    <tr><td>GPS</td><td>Double bande</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>IP68 + 5ATM</td></tr>
+                    <tr><td>Processeur</td><td>Exynos W930</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>BioActive Sensor</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Oui</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Oui</td></tr>
+                    <tr><td>Batterie</td><td>300/425 mAh (~40h)</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Oui</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Comparaison Samsung -->
+        <div id="samsung-comparison" class="sub-section comparison">
+            <h2>Comparaison Complète des Galaxy Watch</h2>
+
+            <h3>Ce que la Watch 8 a de plus que la Watch 7 :</h3>
+            <ul>
+                <li>Écran 3000 nits (vs 2000 nits).</li>
+                <li>Processeur Exynos W1000 3nm plus efficace.</li>
+                <li>Stockage 64 Go (vs 32 Go).</li>
+                <li>Design Cushion avec lugs dynamiques pour meilleur confort.</li>
+                <li>Galaxy AI amélioré (Energy Score avancé).</li>
+            </ul>
+
+            <h3>Ce que la Watch 8 Classic a de plus que la Watch 8 :</h3>
+            <ul>
+                <li>Bouton rotatif physique pour navigation.</li>
+                <li>Boîtier en acier inoxydable premium.</li>
+                <li>Bracelet hybride premium inclus.</li>
+                <li>Style classique avec lunette rotative.</li>
+            </ul>
+
+            <h3>Ce que la Watch Ultra 2025 a de plus que la Watch 8 Classic :</h3>
+            <ul>
+                <li>Boîtier en titane ultra-résistant.</li>
+                <li>Batterie ~100h (vs 40h).</li>
+                <li>Résistance 10ATM + plongée certifiée.</li>
+                <li>Bouton Quick pour actions rapides.</li>
+                <li>GPS L1/L5 pour précision extrême.</li>
+            </ul>
+
+            <h3>Tableau Comparatif Complet</h3>
+            <table class="big-comparison-table">
+                <thead>
+                    <tr>
+                        <th>Modèle</th>
+                        <th>Matériau</th>
+                        <th>Écran</th>
+                        <th>GPS</th>
+                        <th>Résist. Eau</th>
+                        <th>Processeur</th>
+                        <th>Cœur</th>
+                        <th>Always-On</th>
+                        <th>ECG</th>
+                        <th>SpO2</th>
+                        <th>Temp.</th>
+                        <th>Batterie</th>
+                        <th>Bouton Action</th>
+                        <th>Détection Chute</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Watch 8</strong></td>
+                        <td>Aluminium</td>
+                        <td>3000 nits</td>
+                        <td>Double</td>
+                        <td>5ATM</td>
+                        <td>W1000</td>
+                        <td>3e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>40h</td>
+                        <td><span class="cross">Non</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Watch 8 Classic</strong></td>
+                        <td>Acier</td>
+                        <td>3000 nits rotatif</td>
+                        <td>Double</td>
+                        <td>5ATM</td>
+                        <td>W1000</td>
+                        <td>3e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>40h</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Watch Ultra 2025</strong></td>
+                        <td>Titane</td>
+                        <td>3000 nits</td>
+                        <td>Double + L5</td>
+                        <td>10ATM</td>
+                        <td>W1000</td>
+                        <td>Avancé</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>100h</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>Oui</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Watch 7</strong></td>
+                        <td>Aluminium</td>
+                        <td>2000 nits</td>
+                        <td>Double</td>
+                        <td>5ATM</td>
+                        <td>W930</td>
+                        <td>2e gén</td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td><span class="checkmark">Oui</span></td>
+                        <td>40h</td>
+                        <td><span class="cross">Non</span></td>
+                        <td>Oui</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="note">* Données basées sur les spécifications officielles Samsung 2025. Prix indicatifs en € (vérifiez en boutique).</p>
+        </div>
+    </section>
+
+<!-- ==================== HONOR ==================== -->
+    <section id="honor" class="tab-content">
+        <nav class="sub-nav">
+            <button onclick="openSubTab(event, 'honor-watch5')" class="active">Honor Watch 5</button>
+            <button onclick="openSubTab(event, 'honor-comparison')">Comparaison</button>
+        </nav>
+
+        <!-- Honor Watch 5 -->
+        <div id="honor-watch5" class="sub-section active">
+            <h2>Honor Watch 5</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium alloy</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Black</div>
+                    <div class="checkbox-container"><input type="checkbox" id="honor-black" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #ffd700;"></div>
+                    <div class="color-label">Gold</div>
+                    <div class="checkbox-container"><input type="checkbox" id="honor-gold" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #008000;"></div>
+                    <div class="color-label">Green</div>
+                    <div class="checkbox-container"><input type="checkbox" id="honor-green" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Gray</div>
+                    <div class="checkbox-container"><input type="checkbox" id="honor-gray" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #fff;"></div>
+                    <div class="color-label">White</div>
+                    <div class="checkbox-container"><input type="checkbox" id="honor-white" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.honor.com/global/wearables/honor-watch-5/" target="_blank">Voir sur Honor.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>46mm</td><td>150</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran</td><td>AMOLED 1.85", 500 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS + GLONASS + Galileo</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>5ATM</td></tr>
+                    <tr><td>Processeur</td><td>Dual-core</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique PPG</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Non</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Non</td></tr>
+                    <tr><td>Batterie</td><td>480 mAh (~15 jours)</td></tr>
+                    <tr><td>Bouton Action</td><td>Oui</td></tr>
+                    <tr><td>Détection chute</td><td>Non</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Comparaison Honor -->
+        <div id="honor-comparison" class="sub-section comparison">
+            <h2>Comparaison Honor Watch 5</h2>
+            <p><strong>Positionnement :</strong> Montre premium Android à petit prix, avec bouton physique et design élégant.</p>
+            <ul>
+                <li>Meilleur rapport qualité/prix que Samsung Watch 7.</li>
+                <li>Plus de couleurs que Xiaomi Redmi Watch 5.</li>
+                <li>Bouton Action physique (vs aucun sur Redmi).</li>
+                <li>Écran AMOLED + Always-On (vs LCD sur Redmi Active).</li>
+            </ul>
+            <p class="note">Idéale pour clients cherchant style + fonctions santé sans payer le prix Apple/Samsung.</p>
+        </div>
+    </section>
+
+    <!-- ==================== XIAOMI ==================== -->
+    <section id="xiaomi" class="tab-content">
+        <nav class="sub-nav">
+            <button onclick="openSubTab(event, 'xiaomi-redmi5')" class="active">Redmi Watch 5</button>
+            <button onclick="openSubTab(event, 'xiaomi-redmi5active')">Redmi Watch 5 Active</button>
+			<button onclick="openSubTab(event, 'xiaomi-watch2pro')">Watch 2 Pro</button>
+            <button onclick="openSubTab(event, 'xiaomi-comparison')">Comparaison</button>
+        </nav>
+
+        <!-- Redmi Watch 5 -->
+        <div id="xiaomi-redmi5" class="sub-section active">
+            <h2>Redmi Watch 5</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Aluminium alloy + plastique</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Black</div>
+                    <div class="checkbox-container"><input type="checkbox" id="redmi5-black" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+                    <div class="color-label">Silver</div>
+                    <div class="checkbox-container"><input type="checkbox" id="redmi5-silver" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #f5f5dc;"></div>
+                    <div class="color-label">Beige</div>
+                    <div class="checkbox-container"><input type="checkbox" id="redmi5-beige" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.mi.com/global/product/redmi-watch-5/" target="_blank">Voir sur Xiaomi.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>46mm</td><td>100</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran</td><td>AMOLED 2.07", 600 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS + GLONASS + Galileo + BeiDou</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>5ATM</td></tr>
+                    <tr><td>Processeur</td><td>Apollo 4S</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique PPG</td></tr>
+                    <tr><td>Always-On Display</td><td>Oui</td></tr>
+                    <tr><td>ECG</td><td>Non</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Non</td></tr>
+                    <tr><td>Batterie</td><td>550 mAh (~20 jours)</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Non</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Redmi Watch 5 Active -->
+        <div id="xiaomi-redmi5active" class="sub-section">
+            <h2>Redmi Watch 5 Active</h2>
+            <p class="material-info"><strong>Boîtier :</strong> Zinc alloy / métal</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Midnight Black</div>
+                    <div class="checkbox-container"><input type="checkbox" id="redmi5active-black" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-label">Matte Silver</div>
+                    <div class="checkbox-container"><input type="checkbox" id="redmi5active-silver" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.mi.com/global/product/redmi-watch-5-active/" target="_blank">Voir sur Xiaomi.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>44mm</td><td>45</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Écran</td><td>LCD 2.0", 500 nits</td></tr>
+                    <tr><td>GPS</td><td>GPS + GLONASS</td></tr>
+                    <tr><td>Résistance à l'eau</td><td>5ATM</td></tr>
+                    <tr><td>Processeur</td><td>Dual-core</td></tr>
+                    <tr><td>Capteur cardiaque</td><td>Optique PPG</td></tr>
+                    <tr><td>Always-On Display</td><td>Non</td></tr>
+                    <tr><td>ECG</td><td>Non</td></tr>
+                    <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+                    <tr><td>Température</td><td>Non</td></tr>
+                    <tr><td>Batterie</td><td>470 mAh (~18 jours)</td></tr>
+                    <tr><td>Bouton Action</td><td>Non</td></tr>
+                    <tr><td>Détection chute</td><td>Non</td></tr>
+                </tbody>
+            </table>
+        </div>
+		
+		<!-- Xiaomi Watch 2 Pro -->
+	    <div id="xiaomi-watch2pro" class="sub-section">
+	        <h2>Xiaomi Watch 2 Pro</h2>
+	        <p class="material-info"><strong>Boîtier :</strong> Acier inoxydable 316L</p>
+	        <div class="colors">
+	            <div class="color-item">
+	                <div class="color-swatch" style="background-color: #000;"></div>
+	                <div class="color-label">Black</div>
+	                <div class="checkbox-container"><input type="checkbox" id="watch2pro-black" checked></div>
+	            </div>
+	            <div class="color-item">
+	                <div class="color-swatch" style="background-color: #c0c0c0;"></div>
+	                <div class="color-label">Silver</div>
+	                <div class="checkbox-container"><input type="checkbox" id="watch2pro-silver" checked></div>
+	            </div>
+	        </div>
+	        <p><em>Visuels : <a href="https://www.mi.com/global/product/xiaomi-watch-2-pro/" target="_blank">Voir sur Xiaomi.com</a></em></p>
+	        <table class="price-table">
+	            <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>eSIM (€)</th></tr></thead>
+	            <tbody>
+	                <tr><td>46mm</td><td>270</td><td>330</td></tr>
+	            </tbody>
+	        </table>
+	        <table class="specs-table">
+	            <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+	            <tbody>
+	                <tr><td>Écran</td><td>AMOLED 1.43", 600 nits</td></tr>
+	                <tr><td>GPS</td><td>5 systèmes dual-band</td></tr>
+	                <tr><td>Résistance à l'eau</td><td>5ATM</td></tr>
+	                <tr><td>Processeur</td><td>Snapdragon W5+ Gen 1</td></tr>
+	                <tr><td>Capteur cardiaque</td><td>ECG + PPG optique</td></tr>
+	                <tr><td>Always-On Display</td><td>Oui</td></tr>
+	                <tr><td>ECG</td><td>Non</td></tr>
+	                <tr><td>Oxymètre de sang</td><td>Oui</td></tr>
+	                <tr><td>Température</td><td>Non</td></tr>
+	                <tr><td>Batterie</td><td>495 mAh (~65h)</td></tr>
+	                <tr><td>Bouton Action</td><td>Oui (couronne rotative)</td></tr>
+	                <tr><td>Détection chute</td><td>Oui</td></tr>
+	            </tbody>
+	        </table>
+	    </div>
+
+		<!-- Comparaison Xiaomi -->
+		<div id="xiaomi-comparison" class="sub-section comparison">
+		    <h2>Comparaison Complète des Montres Xiaomi</h2>
+			
+			<h3>Ce que la Xiaomi Watch 2 Pro a de plus que la Redmi Watch 5 :</h3>
+	        <ul>
+	            <li>Écran AMOLED 1.43" haute résolution (vs 2.07" basique).</li>
+	            <li>Processeur Snapdragon W5+ Gen 1 (vs Apollo 4S).</li>
+	            <li>ECG + bouton rotatif physique.</li>
+	            <li>Wear OS avec apps Google (vs HyperOS).</li>
+	            <li>Batterie ~65h (vs 20 jours, mais charge rapide).</li>
+	        </ul>
+		
+		    <h3>Ce que la Redmi Watch 5 a de plus que la Redmi Watch 5 Active :</h3>
+		    <ul>
+		        <li>Écran AMOLED 2.07" (vs LCD 2.0").</li>
+		        <li>Batterie ~20 jours (vs 18 jours).</li>
+		        <li>Matériau aluminium alloy premium.</li>
+		        <li>Plus de couleurs (3 vs 2).</li>
+		        <li>GPS multi-systèmes (vs GPS + GLONASS).</li>
+		        <li>HyperOS 2 avec plus d'IA.</li>
+		    </ul>
+		
+		    <h3>Ce que la Redmi Watch 5 Active a de moins que la Watch 5 :</h3>
+		    <ul>
+		        <li>Écran LCD (vs AMOLED).</li>
+		        <li>Pas de bouton Action.</li>
+		        <li>Moins de couleurs et matériaux basiques.</li>
+		        <li>Pas d'Always-On Display.</li>
+		    </ul>
+		
+		    <h3>Tableau Comparatif Complet</h3>
+		    <table class="big-comparison-table">
+		        <thead>
+		            <tr>
+		                <th>Modèle</th>
+		                <th>Matériau</th>
+		                <th>Écran</th>
+		                <th>GPS</th>
+		                <th>Résist. Eau</th>
+		                <th>Processeur</th>
+		                <th>Cœur</th>
+		                <th>Always-On</th>
+		                <th>ECG</th>
+		                <th>SpO2</th>
+		                <th>Temp.</th>
+		                <th>Batterie</th>
+		                <th>Bouton Action</th>
+		                <th>Détection Chute</th>
+		            </tr>
+		        </thead>
+		        <tbody>
+		            <tr>
+		                <td><strong>Redmi Watch 5</strong></td>
+		                <td>Aluminium</td>
+		                <td>AMOLED 2.07"</td>
+		                <td>Multi</td>
+		                <td>5ATM</td>
+		                <td>Apollo 4S</td>
+		                <td>PPG</td>
+		                <td><span class="checkmark">Oui</span></td>
+		                <td><span class="cross">Non</span></td>
+		                <td><span class="checkmark">Oui</span></td>
+		                <td><span class="cross">Non</span></td>
+		                <td>20 jours</td>
+		                <td><span class="cross">Non</span></td>
+		                <td><span class="cross">Non</span></td>
+		            </tr>
+		            <tr>
+		                <td><strong>Redmi Watch 5 Active</strong></td>
+		                <td>Zinc alloy</td>
+		                <td>LCD 2.0"</td>
+		                <td>GPS+GLONASS</td>
+		                <td>5ATM</td>
+		                <td>Dual-core</td>
+		                <td>PPG</td>
+		                <td><span class="cross">Non</span></td>
+		                <td><span class="cross">Non</span></td>
+		                <td><span class="checkmark">Oui</span></td>
+		                <td><span class="cross">Non</span></td>
+		                <td>18 jours</td>
+		                <td><span class="cross">Non</span></td>
+		                <td><span class="cross">Non</span></td>
+		            </tr>
+					<tr>
+	                    <td><strong>Watch 2 Pro</strong></td>
+	                    <td>Acier inox</td>
+	                    <td>AMOLED 1.43"</td>
+	                    <td>Dual-band</td>
+	                    <td>5ATM</td>
+	                    <td>Snapdragon W5+</td>
+	                    <td>ECG+PPG</td>
+	                    <td><span class="checkmark">Oui</span></td>
+	                    <td><span class="cross">Non</span></td>
+	                    <td><span class="checkmark">Oui</span></td>
+	                    <td><span class="cross">Non</span></td>
+	                    <td>65h</td>
+	                    <td><span class="checkmark">Oui</span></td>
+	                    <td><span class="checkmark">Oui</span></td>
+	                </tr>
+		        </tbody>
+		    </table>
+		    <p class="note">* Données basées sur les spécifications officielles Xiaomi 2025. Prix indicatifs en € (vérifiez en boutique).</p>
+		</div>
+    </section>
+
+    <!-- ==================== LUNETTES ==================== -->
+    <section id="lunettes" class="tab-content">
+        <nav class="sub-nav">
+            <button onclick="openSubTab(event, 'rayban-meta')" class="active">Ray-Ban Meta</button>
+            <button onclick="openSubTab(event, 'oakley-meta')">Oakley Meta</button>
+            <button onclick="openSubTab(event, 'rayban-meta2')">Ray-Ban Meta 2</button>
+            <button onclick="openSubTab(event, 'lunettes-comparison')">Comparaison</button>
+        </nav>
+
+        <!-- Ray-Ban Meta (Gen 1) -->
+        <div id="rayban-meta" class="sub-section active">
+            <h2>Ray-Ban Meta (Gen 1)</h2>
+            <p class="material-info"><strong>Style :</strong> Wayfarer / Headliner</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Shiny Black</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #545454;"></div>
+                    <div class="color-label">Matte Black</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #fff8dc;"></div>
+                    <div class="color-label">Jeans</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #8b4513;"></div>
+                    <div class="color-label">Caramel</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.ray-ban.com/usa/ray-ban-meta-ai-glasses" target="_blank">Voir sur Ray-Ban.com</a></em></p>
+
+           <table class="price-table">
+                <thead><tr><th>Modèle</th><th>Shiny</th><th>Matte</th></tr></thead>
+                <tbody>
+                    <tr><td>Wayfrayer</td><td>329</td><td>359</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Caméra</td><td>12MP, 1080p vidéo</td></tr>
+                    <tr><td>Audio</td><td>Haut-parleurs ouverts 5.5mm</td></tr>
+                    <tr><td>AI</td><td>Meta AI (voix)</td></tr>
+                    <tr><td>Batterie</td><td>4h mixte + étui 32h</td></tr>
+                    <tr><td>Stockage</td><td>32 Go</td></tr>
+                    <tr><td>Résistance</td><td>IPX4</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Oakley Meta -->
+        <div id="oakley-meta" class="sub-section">
+            <h2>Oakley Meta HSTN</h2>
+            <p class="material-info"><strong>Style :</strong> HSTN Performance</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-label">Warm Grey</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Black</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #8b4513;"></div>
+                    <div class="color-label">Brown Smoke</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #fff;"></div>
+                    <div class="color-label">Clear</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.oakley.com/en-us/l/oakley-meta" target="_blank">Voir sur Oakley.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Modèle</th><th>Prix (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>Standard</td><td>399</td></tr>
+                    <tr><td>Limited Gold</td><td>499</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Caméra</td><td>12MP, 3K vidéo</td></tr>
+                    <tr><td>Audio</td><td>Haut-parleurs ouverts</td></tr>
+                    <tr><td>AI</td><td>Meta AI performance</td></tr>
+                    <tr><td>Batterie</td><td>8h mixte + étui 38h</td></tr>
+                    <tr><td>Stockage</td><td>32 Go</td></tr>
+                    <tr><td>Résistance</td><td>IPX4 + sport</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Ray-Ban Meta 2 (Gen 2) -->
+        <div id="rayban-meta2" class="sub-section">
+            <h2>Ray-Ban Meta 2 (Gen 2)</h2>
+            <p class="material-info"><strong>Style :</strong> Wayfarer / Headliner upgradé</p>
+            <div class="colors">
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000;"></div>
+                    <div class="color-label">Shiny Black</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #000080;"></div>
+                    <div class="color-label">Cosmic Blue</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #b76e79;"></div>
+                    <div class="color-label">Mystic Violet</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+                <div class="color-item">
+                    <div class="color-swatch" style="background-color: #808080;"></div>
+                    <div class="color-label">Asteroid Grey</div>
+                    <div class="checkbox-container"><input type="checkbox" checked></div>
+                </div>
+            </div>
+            <p><em>Visuels : <a href="https://www.meta.com/ai-glasses/ray-ban-meta/" target="_blank">Voir sur Meta.com</a></em></p>
+
+            <table class="price-table">
+                <thead><tr><th>Style</th><th>Prix (€)</th></tr></thead>
+                <tbody>
+                    <tr><td>Wayfarer</td><td>379</td></tr>
+                    <tr><td>Headliner</td><td>379</td></tr>
+                </tbody>
+            </table>
+
+            <table class="specs-table">
+                <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
+                <tbody>
+                    <tr><td>Caméra</td><td>12MP, 3K vidéo 60fps</td></tr>
+                    <tr><td>Audio</td><td>Haut-parleurs ouverts améliorés</td></tr>
+                    <tr><td>AI</td><td>Meta AI multimodal (vision)</td></tr>
+                    <tr><td>Batterie</td><td>8h mixte + étui 48h</td></tr>
+                    <tr><td>Stockage</td><td>64 Go</td></tr>
+                    <tr><td>Résistance</td><td>IPX4</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Comparaison Lunettes -->
+        <div id="lunettes-comparison" class="sub-section comparison">
+            <h2>Comparaison Complète des Lunettes Meta</h2>
+
+            <h3>Ce que les Ray-Ban Meta 2 ont de plus que Gen 1 :</h3>
+            <ul>
+                <li>Caméra 3K 60fps (vs 1080p).</li>
+                <li>Batterie 2x plus longue (8h vs 4h).</li>
+                <li>Meta AI avec vision (multimodal).</li>
+                <li>Hyperlapse et slow-motion.</li>
+            </ul>
+
+            <h3>Ce que les Oakley Meta ont de plus que les Ray-Ban Meta :</h3>
+            <ul>
+                <li>Style sport HSTN pour performance.</li>
+                <li>Résistance IPX4 + sport renforcée.</li>
+                <li>Lentilles PRIZM Oakley pour contraste.</li>
+                <li>Batterie 8h + étui 38h, adaptée aux athlètes.</li>
+            </ul>
+
+            <h3>Ce que les Ray-Ban Meta 2 ont de plus que les Oakley Meta :</h3>
+            <ul>
+                <li>Stockage 64 Go (vs 32 Go).</li>
+                <li>AI multimodal avec vision avancée.</li>
+                <li>Étui charge 48h (vs 38h).</li>
+                <li>Styles variés (Wayfarer, Headliner, Skyler).</li>
+            </ul>
+
+            <h3>Tableau Comparatif Complet</h3>
+            <table class="big-comparison-table">
+                <thead>
+                    <tr>
+                        <th>Modèle</th>
+                        <th>Prix (€)</th>
+                        <th>Caméra</th>
+                        <th>Batterie</th>
+                        <th>AI</th>
+                        <th>Audio</th>
+                        <th>Résistance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ray-Ban Meta (Gen 1)</strong></td>
+                        <td>299</td>
+                        <td>1080p</td>
+                        <td>4h + 32h</td>
+                        <td>Voix</td>
+                        <td>Oui</td>
+                        <td>IPX4</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Oakley Meta</strong></td>
+                        <td>399-499</td>
+                        <td>3K</td>
+                        <td>8h + 38h</td>
+                        <td>Performance</td>
+                        <td>Oui</td>
+                        <td>IPX4 + sport</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ray-Ban Meta 2</strong></td>
+                        <td>379</td>
+                        <td>3K 60fps</td>
+                        <td>8h + 48h</td>
+                        <td>Vision + Voix</td>
+                        <td>Amélioré</td>
+                        <td>IPX4</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p class="note">* Données basées sur les spécifications officielles Meta 2025. Prix indicatifs en € (vérifiez en boutique).</p>
+        </div>
+    </section>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Cacher toutes les sections principales
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('nav > button').forEach(btn => btn.classList.remove('active'));
+            // Afficher la section sélectionnée
+            document.getElementById(tabName).classList.add('active');
+            evt.currentTarget.classList.add('active');
+
+            // Réinitialiser les sous-sections
+            const subNav = document.querySelector(`#${tabName} .sub-nav`);
+            if (subNav) {
+                subNav.querySelectorAll('button').forEach((btn, i) => {
+                    btn.classList.remove('active');
+                    if (i === 0) btn.classList.add('active');
+                });
+                const firstSubId = subNav.querySelector('button.active').getAttribute('onclick').match(/'([^']+)'/)[1];
+                document.querySelectorAll(`#${tabName} .sub-section`).forEach(sec => sec.classList.remove('active'));
+                document.getElementById(firstSubId).classList.add('active');
+            }
+        }
+
+        function openSubTab(evt, subId) {
+            const parentSection = evt.currentTarget.closest('.tab-content');
+            parentSection.querySelectorAll('.sub-section').forEach(sec => sec.classList.remove('active'));
+            parentSection.querySelectorAll('.sub-nav button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(subId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
