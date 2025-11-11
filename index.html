@@ -52,7 +52,7 @@
     </style>
 </head>
 
-<!-- === FIREBASE + AUTH + POPUP (VERSION FINALE) === -->
+<!-- === FIREBASE + AUTH + STOCK + PRIX + ÉDITEUR (VERSION FINALE CORRIGÉE) === -->
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
@@ -74,22 +74,22 @@
   const db = firebase.database();
   const auth = firebase.auth();
 
-  // Attendre le DOM
+  // === ATTENDRE LE DOM ===
   document.addEventListener('DOMContentLoaded', () => {
     console.log("DOM chargé, Firebase & Auth prêts");
 
-    // === SYNCHRO CHECKBOXES ===
+    // === SYNCHRO CHECKBOXES (STOCK) ===
     document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
       const key = checkbox.id;
       if (!key) return;
 
-      // Lecture (publique)
+      // Lecture publique
       db.ref('stock/' + key).on('value', snap => {
         const val = snap.val();
         if (val !== null) checkbox.checked = val;
       });
 
-      // Écriture (seulement connecté)
+      // Écriture sécurisée
       checkbox.addEventListener('click', e => {
         if (!auth.currentUser) {
           e.preventDefault();
@@ -106,20 +106,89 @@
         }
       });
     });
+
+    // === PRIX DYNAMIQUES ===
+    db.ref('prices').on('value', snap => {
+      const prices = snap.val();
+      if (!prices) return;
+      document.querySelectorAll('.price').forEach(span => {
+        const key = span.id.replace('price-', '');
+        if (prices[key] !== undefined) {
+          span.textContent = Number(prices[key]).toLocaleString();
+        }
+      });
+    });
+
+    // Init prix par défaut
+    db.ref('prices').once('value').then(snap => {
+      if (!snap.val()) {
+        const defaultPrices = {
+         // Apple Watch Series 11
+      'aw11-42-gps-alu': 429,
+      'aw11-42-gpscell-alu': 529,
+      'aw11-42-gpscell-titane': 699,
+      'aw11-46-gps-alu': 459,
+      'aw11-46-gpscell-alu': 559,
+      'aw11-46-gpscell-titane': 729,
+
+      // Apple Watch Series 10
+      'aw10-42-gps-alu': 429,
+      'aw10-42-gpscell-alu': 529,
+      'aw10-42-gpscell-titane': 697,
+      'aw10-46-gps-alu': 459,
+      'aw10-46-gpscell-alu': 559,
+      'aw10-46-gpscell-titane': 729,
+
+      // SE 3
+      'se3-40-gps': 269, 'se3-40-gpscell': 319,
+      'se3-44-gps': 299, 'se3-44-gpscell': 349,
+
+      // SE 2
+      'se2-40-gps': 219, 'se2-40-gpscell': 269,
+      'se2-44-gps': 249, 'se2-44-gpscell': 299,
+
+      // Ultra
+      'ultra3-49-gpscell': 849,
+      'ultra2-49-gpscell': 749,
+
+      // Samsung
+      'sw8-40-bt': 349, 'sw8-40-lte': 399,
+      'sw8-44-bt': 379, 'sw8-44-lte': 429,
+      'sw8c-46-bt': 499, 'sw8c-46-lte': 549,
+      'swultra25-47-lte': 749,
+      'sw7-40-bt': 300, 'sw7-40-lte': 350,
+      'sw7-44-bt': 330, 'sw7-44-lte': 380,
+
+      // Honor
+      'honor5-46': 150,
+
+      // Xiaomi
+      'redmi5-46': 100,
+      'redmi5active-44': 45,
+      'xw2pro-46-bt': 270, 'xw2pro-46-esim': 330,
+
+      // Lunettes
+      'raybanmeta1-wayfarer-shiny': 329,
+      'raybanmeta1-wayfarer-matte': 359,
+      'oakleymeta-standard': 399,
+      'oakleymeta-gold': 499,
+      'raybanmeta2-wayfarer': 379,
+      'raybanmeta2-headliner': 379
+        };
+        db.ref('prices').set(defaultPrices);
+      }
+    });
   });
 
-  // === POPUP LOGIN AVEC CROIX ===
+  // === POPUP LOGIN ===
   function showLoginPopup(checkbox) {
     if (document.getElementById('loginPopup')) return;
-
     const popup = document.createElement('div');
     popup.id = 'loginPopup';
     popup.style = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;display:flex;align-items:center;justify-content:center;z-index:9999;';
-    
     popup.innerHTML = `
       <div style="background:white;padding:30px;border-radius:15px;text-align:center;width:300px;position:relative;">
-        <button onclick="document.getElementById('loginPopup').remove()" 
-                style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:24px;cursor:pointer;color:#999;">×</button>
+        <button onclick="document.getElementById('loginPopup').remove()" style="position:absolute;top:10px;right:10px;background:none;border:none;font-size:24px;cursor:pointer;color:#999;">×</button>
         <h3>Connexion requise</h3>
         <p>Pour modifier le stock</p>
         <input type="email" id="loginEmail" placeholder="Email" style="width:100%;padding:10px;margin:10px 0;border:1px solid #ccc;border-radius:5px;"><br>
@@ -130,18 +199,12 @@
       </div>
     `;
     document.body.appendChild(popup);
-
-    // Fermer en cliquant dehors
-    popup.addEventListener('click', e => {
-      if (e.target === popup) popup.remove();
-    });
+    popup.addEventListener('click', e => { if (e.target === popup) popup.remove(); });
   }
 
-  // === LOGIN ===
   window.tryLogin = function(checkboxId) {
     const email = document.getElementById('loginEmail').value;
     const password = document.getElementById('loginPassword').value;
-
     auth.signInWithEmailAndPassword(email, password)
       .then(() => {
         document.getElementById('loginPopup').remove();
@@ -154,21 +217,149 @@
       });
   };
 
-  // === BOUTON DÉCONNEXION ===
+  // === GESTION DES BOUTONS (DÉCONNEXION + ÉDITEUR PRIX) ===
   auth.onAuthStateChanged(user => {
     const header = document.querySelector('header');
-    let btn = document.getElementById('logoutBtn');
-    if (user && !btn) {
-      btn = document.createElement('button');
-      btn.id = 'logoutBtn';
-      btn.textContent = 'Déconnexion';
-      btn.style = 'position:absolute;top:20px;right:20px;background:red;color:white;padding:8px 15px;border:none;border-radius:5px;cursor:pointer;';
-      btn.onclick = () => auth.signOut();
-      header.appendChild(btn);
-    } else if (!user && btn) {
-      btn.remove();
+
+    // Bouton Déconnexion
+    let logoutBtn = document.getElementById('logoutBtn');
+    if (user && !logoutBtn) {
+      logoutBtn = document.createElement('button');
+      logoutBtn.id = 'logoutBtn';
+      logoutBtn.textContent = 'Déconnexion';
+      logoutBtn.style = 'position:absolute;top:20px;right:20px;background:red;color:white;padding:8px 15px;border:none;border-radius:5px;cursor:pointer;';
+      logoutBtn.onclick = () => auth.signOut();
+      header.appendChild(logoutBtn);
+    } else if (!user && logoutBtn) {
+      logoutBtn.remove();
+    }
+
+    // Bouton Éditeur Prix
+    let priceBtn = document.getElementById('priceEditorBtn');
+    if (user && !priceBtn) {
+      priceBtn = document.createElement('div');
+      priceBtn.id = 'priceEditorBtn';
+      priceBtn.style = 'position:absolute;top:20px;right:150px;';
+      priceBtn.innerHTML = `
+        <button onclick="openPriceEditor()" style="background:#ff9500;color:white;padding:8px 15px;border:none;border-radius:5px;cursor:pointer;font-size:12px;">
+          Modifier les prix
+        </button>
+      `;
+      header.appendChild(priceBtn);
+    } else if (!user && priceBtn) {
+      priceBtn.remove();
     }
   });
+
+  // === ÉDITEUR DE PRIX ===
+  function openPriceEditor() {
+    if (!auth.currentUser) {
+      alert("Vous devez être connecté pour modifier les prix !");
+      return;
+    }
+
+    if (document.getElementById('priceEditor')) return;
+
+    const editor = document.createElement('div');
+    editor.id = 'priceEditor';
+    editor.style = 'position:fixed;top:0;left:0;width:100%;height:100%;background:#0008;display:flex;align-items:center;justify-content:center;z-index:9999;';
+    editor.innerHTML = `
+      <div style="background:white;padding:25px;border-radius:15px;max-width:500px;width:90%;max-height:80%;overflow-y:auto;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:15px;">
+          <h3>Modifier les prix</h3>
+          <button onclick="document.getElementById('priceEditor').remove()" style="background:none;border:none;font-size:24px;cursor:pointer;color:#999;">×</button>
+        </div>
+        <div id="priceList">Chargement...</div>
+        <div style="margin-top:20px;text-align:right;">
+          <button onclick="savePrices()" style="background:#007aff;color:white;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">Sauvegarder</button>
+          <button onclick="document.getElementById('priceEditor').remove()" style="margin-left:10px;background:#ccc;color:#333;padding:10px 20px;border:none;border-radius:5px;cursor:pointer;">Annuler</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(editor);
+    loadPricesIntoEditor();
+  }
+
+ function loadPricesIntoEditor() {
+  db.ref('prices').once('value').then(snap => {
+    const prices = snap.val() || {};
+    const list = document.getElementById('priceList');
+    list.innerHTML = '<p style="color:#666;font-size:12px;margin-bottom:10px;">Clique sur un prix pour le modifier</p>';
+
+    if (document.querySelectorAll('.price').length === 0) {
+      list.innerHTML += '<p style="color:#999;font-style:italic;">Aucun prix trouvé.</p>';
+      return;
+    }
+
+    // Trier par ID (clé Firebase)
+    const priceElements = Array.from(document.querySelectorAll('.price'));
+    priceElements.sort((a, b) => {
+      const keyA = a.id.replace('price-', '');
+      const keyB = b.id.replace('price-', '');
+      return keyA.localeCompare(keyB);
+    });
+
+    priceElements.forEach(span => {
+      const key = span.id.replace('price-', '');
+      const current = prices[key] !== undefined ? prices[key] : 0;
+
+      const row = document.createElement('div');
+      row.style = 'display:flex;justify-content:space-between;align-items:center;margin:8px 0;padding:10px;background:#f9f9f9;border-radius:8px;border-left:4px solid #007aff;';
+
+      row.innerHTML = `
+        <label style="font-size:14px;flex:1;font-weight:500;color:#333;">${key}</label>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <input type="number" data-key="${key}" value="${current}" 
+                 style="width:90px;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:14px;text-align:center;">
+          <small style="color:#007aff;font-weight:bold;">€</small>
+        </div>
+      `;
+
+      // Couleur par marque
+      const section = span.closest('section').id;
+      if (section === 'samsung') row.style.borderLeftColor = '#00c73c';
+      if (section === 'honor') row.style.borderLeftColor = '#ff6b00';
+      if (section === 'xiaomi') row.style.borderLeftColor = '#ff4500';
+      if (section === 'lunettes') row.style.borderLeftColor = '#8a2be2';
+
+      list.appendChild(row);
+    });
+  }).catch(err => {
+    document.getElementById('priceList').innerHTML = '<p style="color:red;">Erreur de chargement.</p>';
+  });
+}
+
+  function savePrices() {
+    if (!auth.currentUser) {
+      alert("Vous avez été déconnecté. Reconnectez-vous.");
+      document.getElementById('priceEditor').remove();
+      return;
+    }
+
+    const updates = {};
+    let hasChanges = false;
+
+    document.querySelectorAll('#priceList input').forEach(input => {
+      const key = input.dataset.key;
+      const value = parseInt(input.value) || 0;
+      updates[key] = value;
+      if (value !== 0) hasChanges = true;
+    });
+
+    if (!hasChanges) {
+      alert("Aucun prix modifié.");
+      return;
+    }
+
+    db.ref('prices').set(updates)
+      .then(() => {
+        alert('Prix mis à jour avec succès !');
+        document.getElementById('priceEditor').remove();
+      })
+      .catch(err => {
+        alert('Erreur de sauvegarde : ' + err.message);
+      });
+  }
 </script>
 	
 <body>
@@ -310,13 +501,23 @@
             </div>
             <p><em>Visuels : <a href="https://www.apple.com/apple-watch-series-11/" target="_blank">Voir sur Apple.com</a></em></p>
 
-            <table class="price-table">
-                <thead><tr><th>Taille</th><th>GPS (€) Aluminium</th><th>GPS + Cellulaire (€) Aluminium</th><th>GPS + Cellulaire (€) Titane</th></tr></thead>
-                <tbody>
-                    <tr><td>42mm</td><td>429</td><td>529</td><td>699</td></tr>
-                    <tr><td>46mm</td><td>459</td><td>559</td><td>729</td></tr>
-                </tbody>
-            </table>
+           <table class="price-table">
+		  <thead><tr><th>Taille</th><th>GPS (€) Alu</th><th>GPS + Cell (€) Alu</th><th>GPS + Cell (€) Titane</th></tr></thead>
+		  <tbody>
+		    <tr>
+		      <td>42mm</td>
+		      <td><span class="price" id="price-aw11-42-gps-alu">429</span></td>
+		      <td><span class="price" id="price-aw11-42-gpscell-alu">529</span></td>
+		      <td><span class="price" id="price-aw11-42-gpscell-titane">699</span></td>
+		    </tr>
+		    <tr>
+		      <td>46mm</td>
+		      <td><span class="price" id="price-aw11-46-gps-alu">459</span></td>
+		      <td><span class="price" id="price-aw11-46-gpscell-alu">559</span></td>
+		      <td><span class="price" id="price-aw11-46-gpscell-titane">729</span></td>
+		    </tr>
+		  </tbody>
+		</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -434,13 +635,30 @@
             </div>
             <p><em>Visuels : <a href="https://www.apple.com/apple-watch-series-10/" target="_blank">Voir sur Apple.com</a></em></p>
 
-           <table class="price-table">
-                <thead><tr><th>Taille</th><th>GPS (€) Aluminium</th><th>GPS + Cellulaire (€) Aluminium</th><th>GPS + Cellulaire (€) Titane</th></tr></thead>
-                <tbody>
-                    <tr><td>42mm</td><td>429</td><td>529</td><td>699</td></tr>
-                    <tr><td>46mm</td><td>459</td><td>559</td><td>729</td></tr>
-                </tbody>
-            </table>
+          <table class="price-table">
+		  <thead>
+		    <tr>
+		      <th>Taille</th>
+		      <th>GPS (€) Aluminium</th>
+		      <th>GPS + Cellulaire (€) Aluminium</th>
+		      <th>GPS + Cellulaire (€) Titane</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td>42mm</td>
+		      <td><span class="price" id="price-aw10-42-gps-alu">429</span></td>
+		      <td><span class="price" id="price-aw10-42-gpscell-alu">529</span></td>
+		      <td><span class="price" id="price-aw10-42-gpscell-titane">697</span></td>
+		    </tr>
+		    <tr>
+		      <td>46mm</td>
+		      <td><span class="price" id="price-aw10-46-gps-alu">459</span></td>
+		      <td><span class="price" id="price-aw10-46-gpscell-alu">559</span></td>
+		      <td><span class="price" id="price-aw10-46-gpscell-titane">729</span></td>
+		    </tr>
+		  </tbody>
+		</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -497,13 +715,21 @@
             </div>
             <p><em>Visuels : <a href="https://www.apple.com/apple-watch-se/" target="_blank">Voir sur Apple.com</a></em></p>
 
-            <table class="price-table">
-                <thead><tr><th>Taille</th><th>GPS (€)</th><th>GPS + Cellulaire (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>40mm</td><td>269</td><td>319</td></tr>
-                    <tr><td>44mm</td><td>299</td><td>349</td></tr>
-                </tbody>
-            </table>
+           <table class="price-table">
+			  <thead><tr><th>Taille</th><th>GPS (€)</th><th>GPS + Cellulaire (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>40mm</td>
+			      <td><span class="price" id="price-se3-40-gps">269</span></td>
+			      <td><span class="price" id="price-se3-40-gpscell">319</span></td>
+			    </tr>
+			    <tr>
+			      <td>44mm</td>
+			      <td><span class="price" id="price-se3-44-gps">299</span></td>
+			      <td><span class="price" id="price-se3-44-gpscell">349</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -575,12 +801,20 @@
             <p><em>Visuels : <a href="https://www.apple.com/apple-watch-se/" target="_blank">Voir sur Apple.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>GPS (€)</th><th>GPS + Cellulaire (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>40mm</td><td>219</td><td>269</td></tr>
-                    <tr><td>44mm</td><td>249</td><td>299</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>GPS (€)</th><th>GPS + Cellulaire (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>40mm</td>
+			      <td><span class="price" id="price-se2-40-gps">219</span></td>
+			      <td><span class="price" id="price-se2-40-gpscell">269</span></td>
+			    </tr>
+			    <tr>
+			      <td>44mm</td>
+			      <td><span class="price" id="price-se2-44-gps">249</span></td>
+			      <td><span class="price" id="price-se2-44-gpscell">299</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -620,9 +854,14 @@
             <p><em>Visuels : <a href="https://www.apple.com/apple-watch-ultra/" target="_blank">Voir sur Apple.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>GPS + Cellulaire (€)</th></tr></thead>
-                <tbody><tr><td>49mm</td><td>849</td></tr></tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>GPS + Cellulaire (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>49mm</td>
+			      <td><span class="price" id="price-ultra3-49-gpscell">849</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -661,10 +900,15 @@
             </div>
             <p><em>Visuels : <a href="https://www.apple.com/apple-watch-ultra-2/" target="_blank">Voir sur Apple.com</a></em></p>
 
-            <table class="price-table">
-                <thead><tr><th>Taille</th><th>GPS + Cellulaire (€)</th></tr></thead>
-                <tbody><tr><td>49mm</td><td>749</td></tr></tbody>
-            </table>
+           <table class="price-table">
+			  <thead><tr><th>Taille</th><th>GPS + Cellulaire (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>49mm</td>
+			      <td><span class="price" id="price-ultra2-49-gpscell">749</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -949,13 +1193,21 @@
             </div>
             <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch8/" target="_blank">Voir sur Samsung.com</a></em></p>
 
-            <table class="price-table">
-                <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>40mm</td><td>349</td><td>399</td></tr>
-                    <tr><td>44mm</td><td>379</td><td>429</td></tr>
-                </tbody>
-            </table>
+           <table class="price-table">
+			  <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>40mm</td>
+			      <td><span class="price" id="price-sw8-40-bt">349</span></td>
+			      <td><span class="price" id="price-sw8-40-lte">399</span></td>
+			    </tr>
+			    <tr>
+			      <td>44mm</td>
+			      <td><span class="price" id="price-sw8-44-bt">379</span></td>
+			      <td><span class="price" id="price-sw8-44-lte">429</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -995,11 +1247,15 @@
             <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch8-classic/" target="_blank">Voir sur Samsung.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>46mm</td><td>499</td><td>549</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>46mm</td>
+			      <td><span class="price" id="price-sw8c-46-bt">499</span></td>
+			      <td><span class="price" id="price-sw8c-46-lte">549</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1049,11 +1305,14 @@
             <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch-ultra/" target="_blank">Voir sur Samsung.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>LTE (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>47mm</td><td>749</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>LTE (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>47mm</td>
+			      <td><span class="price" id="price-swultra25-47-lte">749</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1125,12 +1384,20 @@
             <p><em>Visuels : <a href="https://www.samsung.com/us/watches/galaxy-watch7/" target="_blank">Voir sur Samsung.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>40mm</td><td>300</td><td>350</td></tr>
-                    <tr><td>44mm</td><td>330</td><td>380</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>LTE (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>40mm</td>
+			      <td><span class="price" id="price-sw7-40-bt">300</span></td>
+			      <td><span class="price" id="price-sw7-40-lte">350</span></td>
+			    </tr>
+			    <tr>
+			      <td>44mm</td>
+			      <td><span class="price" id="price-sw7-44-bt">330</span></td>
+			      <td><span class="price" id="price-sw7-44-lte">380</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1313,11 +1580,14 @@
             <p><em>Visuels : <a href="https://www.honor.com/global/wearables/honor-watch-5/" target="_blank">Voir sur Honor.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>46mm</td><td>150</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>46mm</td>
+			      <td><span class="price" id="price-honor5-46">150</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1384,12 +1654,15 @@
             </div>
             <p><em>Visuels : <a href="https://www.mi.com/global/product/redmi-watch-5/" target="_blank">Voir sur Xiaomi.com</a></em></p>
 
-            <table class="price-table">
-                <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>46mm</td><td>100</td></tr>
-                </tbody>
-            </table>
+           <table class="price-table">
+			  <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>46mm</td>
+			      <td><span class="price" id="price-redmi5-46">100</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1429,11 +1702,14 @@
             <p><em>Visuels : <a href="https://www.mi.com/global/product/redmi-watch-5-active/" target="_blank">Voir sur Xiaomi.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>44mm</td><td>45</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Taille</th><th>Prix (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>44mm</td>
+			      <td><span class="price" id="price-redmi5active-44">45</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1472,11 +1748,15 @@
 	        </div>
 	        <p><em>Visuels : <a href="https://www.mi.com/global/product/xiaomi-watch-2-pro/" target="_blank">Voir sur Xiaomi.com</a></em></p>
 	        <table class="price-table">
-	            <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>eSIM (€)</th></tr></thead>
-	            <tbody>
-	                <tr><td>46mm</td><td>270</td><td>330</td></tr>
-	            </tbody>
-	        </table>
+			  <thead><tr><th>Taille</th><th>Bluetooth (€)</th><th>eSIM (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>46mm</td>
+			      <td><span class="price" id="price-xw2pro-46-bt">270</span></td>
+			      <td><span class="price" id="price-xw2pro-46-esim">330</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 	        <table class="specs-table">
 	            <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
 	            <tbody>
@@ -1640,11 +1920,15 @@
             <p><em>Visuels : <a href="https://www.ray-ban.com/usa/ray-ban-meta-ai-glasses" target="_blank">Voir sur Ray-Ban.com</a></em></p>
 
            <table class="price-table">
-                <thead><tr><th>Modèle</th><th>Shiny</th><th>Matte</th></tr></thead>
-                <tbody>
-                    <tr><td>Wayfrayer</td><td>329</td><td>359</td></tr>
-                </tbody>
-            </table>
+			  <thead><tr><th>Modèle</th><th>Shiny</th><th>Matte</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>Wayfarer</td>
+			      <td><span class="price" id="price-raybanmeta1-wayfarer-shiny">329</span></td>
+			      <td><span class="price" id="price-raybanmeta1-wayfarer-matte">359</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1687,13 +1971,19 @@
             </div>
             <p><em>Visuels : <a href="https://www.oakley.com/en-us/l/oakley-meta" target="_blank">Voir sur Oakley.com</a></em></p>
 
-            <table class="price-table">
-                <thead><tr><th>Modèle</th><th>Prix (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>Standard</td><td>399</td></tr>
-                    <tr><td>Limited Gold</td><td>499</td></tr>
-                </tbody>
-            </table>
+           <table class="price-table">
+			  <thead><tr><th>Modèle</th><th>Prix (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>Standard</td>
+			      <td><span class="price" id="price-oakleymeta-standard">399</span></td>
+			    </tr>
+			    <tr>
+			      <td>Limited Gold</td>
+			      <td><span class="price" id="price-oakleymeta-gold">499</span></td>
+			    </tr>
+			  </tbody>
+			</table>
 
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
@@ -1737,13 +2027,18 @@
             <p><em>Visuels : <a href="https://www.meta.com/ai-glasses/ray-ban-meta/" target="_blank">Voir sur Meta.com</a></em></p>
 
             <table class="price-table">
-                <thead><tr><th>Style</th><th>Prix (€)</th></tr></thead>
-                <tbody>
-                    <tr><td>Wayfarer</td><td>379</td></tr>
-                    <tr><td>Headliner</td><td>379</td></tr>
-                </tbody>
-            </table>
-
+			  <thead><tr><th>Style</th><th>Prix (€)</th></tr></thead>
+			  <tbody>
+			    <tr>
+			      <td>Wayfarer</td>
+			      <td><span class="price" id="price-raybanmeta2-wayfarer">379</span></td>
+			    </tr>
+			    <tr>
+			      <td>Headliner</td>
+			      <td><span class="price" id="price-raybanmeta2-headliner">379</span></td>
+			    </tr>
+			  </tbody>
+			</table>
             <table class="specs-table">
                 <thead><tr><th>Caractéristique</th><th>Détail</th></tr></thead>
                 <tbody>
